@@ -31,6 +31,80 @@ export const getters ={
 }
 
 export const actions = {
+
+    async Asc({commit}){
+        try {
+            const Passwords = await this.$axios({
+                method: "get",
+                url: `http://localhost:3000/passwords?_sort=id&_order=asc`,
+                "Content-Type":"application/json"
+            })
+            console.log(Passwords)
+            const users = Passwords.data.map(item=>{
+                return{
+                    id: item.id,
+                    fechaCreacion: item.fechaCreacion,
+                    nombreUsuario: item.nombreUsuario,
+                    Contrasena: item.Contrasena,
+                    NickName: item.NickName
+                }
+            })
+            // console.log(users)
+            commit('getUsers',users)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    async Desc({commit}){
+        try {
+            const Passwords = await this.$axios({
+                method: "get",
+                url: `http://localhost:3000/passwords?_sort=id&_order=desc`,
+                "Content-Type":"application/json"
+            })
+            console.log(Passwords)
+            const users = Passwords.data.map(item=>{
+                return{
+                    id: item.id,
+                    fechaCreacion: item.fechaCreacion,
+                    nombreUsuario: item.nombreUsuario,
+                    Contrasena: item.Contrasena,
+                    NickName: item.NickName
+                }
+            })
+            // console.log(users)
+            commit('getUsers',users)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+
+
+
+    async searchUsuario({commit},payload){
+        try {
+            const Passwords = await this.$axios({
+                method: "get",
+                url: `http://localhost:3000/passwords?nombreUsuario=${payload}`,
+                "Content-Type":"application/json"
+            })
+            console.log(Passwords)
+            const users = Passwords.data.map(item=>{
+                return{
+                    id: item.id,
+                    fechaCreacion: item.fechaCreacion,
+                    nombreUsuario: item.nombreUsuario,
+                    Contrasena: item.Contrasena,
+                    NickName: item.NickName
+                }
+            })
+            // console.log(users)
+            commit('getUsers',users)
+        } catch (error) {
+            console.log(error)
+        }
+    },
     async verUsuario({commit},payload){
         try {
             console.log(payload)

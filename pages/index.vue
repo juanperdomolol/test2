@@ -11,9 +11,11 @@
                 </b-button>
               </b-input-group-prepend>
               <b-form-input
+              v-model="buscar"
                 type="text"
                 class="mr-sm-2"
                 placeholder="Buscar"
+                @keyup="buscarPassword(buscar)"
               ></b-form-input>
             </b-input-group>
           </b-col>
@@ -21,9 +23,9 @@
 
         <b-row>
           <b-col>
-            <span>Ordenar por fecha</span>
-            <b-button  class="mt-2">Asc </b-button>
-            <b-button  class="mt-2">Desc </b-button>
+            <span>Ordenar por nombre</span>
+            <b-button @click="Asc" class="mt-2">Asc </b-button>
+            <b-button  @click="Desc" class="mt-2">Desc </b-button>
           </b-col>
         </b-row>
 
@@ -79,6 +81,11 @@ import formulario from "@/components/formulario";
 
 import { mapState, mapActions } from "vuex";
 export default {
+  data(){
+    return{
+      buscar:''
+    }
+  },
   components: {
     users,
     formulario,
@@ -89,9 +96,13 @@ export default {
   },
   computed: {
     ...mapState(["UserNames"]),
+
   },
   methods: {
-    ...mapActions(["setNewUsuario"]),
+    ...mapActions(["setNewUsuario",'Asc','Desc']),
+    buscarPassword(buscar){
+      this.$store.dispatch("searchUsuario",buscar)
+    },
     // editarFormulario(){
     //   this.$store.state('UserNames')===this.formUser
     // },

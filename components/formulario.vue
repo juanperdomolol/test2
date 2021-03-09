@@ -90,7 +90,7 @@ export default {
       return (this.passwd= r);
     },
     quitarEspacios() {
-      return this.infoUser.nombreUsuario.split(" ").join("");
+      return this.infoUser.nombreUsuario.split(" ").join(".");
     },
     procesarUsuario() {
       const NuevoUser = {
