@@ -12,7 +12,6 @@
               </b-input-group-prepend>
               <b-form-input
                 type="text"
-                v-model="buscar"
                 class="mr-sm-2"
                 placeholder="Buscar"
               ></b-form-input>
@@ -64,10 +63,9 @@
                 </b-col>
               </b-row>
             </b-card>
-            <b-form @submit.prevent="procesarUsuario">
-              <formulario :formUser="formUser" />
+            <formulario ref="formularioUser" />
+              
               <!-- <formulario /> -->
-            </b-form>
           </b-col>
         </b-row>
       </b-col>
@@ -84,18 +82,6 @@ export default {
   components: {
     users,
     formulario,
-  },
-  data() {
-    return {
-      buscar: "",
-      formUser: {
-        nombreUsuario: "",
-        NickName: "",
-        Contrasena: "",
-        fechaCreacion: " ",
-        FechaEdicion: " ",
-      },
-    };
   },
   created() {
     this.$store.dispatch("getPasswords");

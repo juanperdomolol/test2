@@ -1,14 +1,32 @@
 export const state = () => ({
     editUser:[],
-    UserNames: []
+    UserNames: [],
+    userEdit: false
 })
 
 export const mutations = {
+    update(state,payload){
+      state.UserNames = state.UserNames.map(item => item.id === payload.id ? payload : item)
+        
+    },
+    delete(state,payload){
+        state.UserNames = state.UserNames.filter(item => item.id !== payload)
+
+    },
     getUsers(state,payload){
         state.UserNames = payload
+        // localStorage.setItem('user', {})
     },
     getEditusuario(state,payload){
         state.editUser = payload
+        state.userEdit = true
+        // localStorage.setItem('user', payload)
+    }
+}
+
+export const getters ={
+    getUserState:(state)=>{
+        return state.editUser
     }
 }
 
@@ -60,21 +78,22 @@ export const actions = {
     async deleteUser({commit},id){
         try {
             const deleteUser = await this.$axios({
-                method: "delete",
-                url: `http://localhost:3000/passwords${id}`,
+                method: "DELETE",
+                url: `http://localhost:3000/passwords/${id}`,
             })
-            // console.log(deleteUser)
+            console.log(deleteUser)
+            commit('delete',deleteUser)
         } catch (error) {
             
         }
     },
-    async uptadeUser({commit},id){
+    async uptadeUser({commit},editUsers){
         try {
             const actualizarUser = await this.$axios({
                 method: "PUT",
-                url: `http://localhost:3000/passwords${id}`,
+                url: `http://localhost:3000/passwords/${editUsers.id}`,
+                data: editUsers
             })
-            console.log(actualizarUser)
         } catch (error) {
             
         }
