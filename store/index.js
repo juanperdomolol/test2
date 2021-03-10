@@ -46,7 +46,9 @@ export const actions = {
                     fechaCreacion: item.fechaCreacion,
                     nombreUsuario: item.nombreUsuario,
                     Contrasena: item.Contrasena,
-                    NickName: item.NickName
+                    NickName: item.NickName,
+                    fechaEdicion:item.fechaEdicion
+
                 }
             })
             // console.log(users)
@@ -69,7 +71,9 @@ export const actions = {
                     fechaCreacion: item.fechaCreacion,
                     nombreUsuario: item.nombreUsuario,
                     Contrasena: item.Contrasena,
-                    NickName: item.NickName
+                    NickName: item.NickName,
+                    fechaEdicion:item.fechaEdicion
+
                 }
             })
             // console.log(users)
@@ -86,7 +90,7 @@ export const actions = {
         try {
             const Passwords = await this.$axios({
                 method: "get",
-                url: `http://localhost:3000/passwords?nombreUsuario=${payload}`,
+                url: `http://localhost:3000/passwords?q=${payload}`,
                 "Content-Type":"application/json"
             })
             console.log(Passwords)
@@ -96,7 +100,9 @@ export const actions = {
                     fechaCreacion: item.fechaCreacion,
                     nombreUsuario: item.nombreUsuario,
                     Contrasena: item.Contrasena,
-                    NickName: item.NickName
+                    NickName: item.NickName,
+                    fechaEdicion:item.fechaEdicion
+
                 }
             })
             // console.log(users)
@@ -140,7 +146,8 @@ export const actions = {
                     fechaCreacion: item.fechaCreacion,
                     nombreUsuario: item.nombreUsuario,
                     Contrasena: item.Contrasena,
-                    NickName: item.NickName
+                    NickName: item.NickName,
+                    fechaEdicion:item.fechaEdicion
                 }
             })
             // console.log(users)

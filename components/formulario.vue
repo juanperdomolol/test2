@@ -3,16 +3,18 @@
     <b-form >
       <b-form-group label="Nombre de Usuario">
         <b-form-input
-          v-model="username"
+          v-model.lazy="username"
           type="text"
           placeholder="Ingresa tu nombre de usuario"
           required
+          @blur="quitarEspacios"
         >
         </b-form-input>
       </b-form-group>
 
       <b-form-group label="NickName">
         <b-form-input
+          readonly
           v-model="nick"
           type="text"
           placeholder="Ingresa tu NickName"
@@ -35,23 +37,23 @@
           </b-input-group-append>
         </b-input-group>
 
-        <b-form-text>
+        <b-form-text v-if="userEdit">
           <p class="text-dark">Fecha creado</p>
-          <span class="text-dark">{{ $moment() }}</span>
+          <span class="text-dark">{{ fecha}}</span>
         </b-form-text>
 
-        <b-form-text>
+        <b-form-text v-if="userEdit">
           <p class="text-dark">Fecha ultima edicion</p>
-          <span class="text-dark">{{ $moment() }}</span>
+          <span class="text-dark">{{ edicion }}</span>
         </b-form-text>
 
         <b-button v-if="!userEdit" @click="procesarUsuario" type="submit" variant="primary" class="material-icons"
           >save GUARDAR</b-button
         >
-        <b-button v-if="userEdit"  type="reset" @click="deleteUser(editUser.id)" variant="danger" class="material-icons"
+        <b-button v-if="userEdit"  type="submit" @click="deleteUser(editUser.id)" variant="danger" class="material-icons"
           >delete ELIMINAR</b-button
         >
-          <b-button v-if="userEdit"  @click="editarUsuario(editUser.id)" type="reset" variant="primary" class="material-icons"
+          <b-button v-if="userEdit"  @click="editarUsuario(editUser.id)" type="submit" variant="primary" class="material-icons" :disabled="validar"
           >update ACTUALIZAR</b-button
         >
       </b-form-group>
@@ -68,6 +70,8 @@ export default {
       username: '',
       nick: '',
       passwd: '',
+      fecha: '',
+      edicion: ''
     };
   },
   mounted() {
@@ -76,7 +80,9 @@ export default {
      this.dataForm = this.$store.getters.getUserState,
      this.username = this.dataForm.nombreUsuario,
      this.nick = this.dataForm.NickName,
-     this.passwd = this.dataForm.Contrasena
+     this.passwd = this.dataForm.Contrasena,
+     this.fecha = this.dataForm.fechaCreacion
+     this.edicion = this.dataForm.fechaEdicion
     })
   },
   props: {
@@ -90,14 +96,19 @@ export default {
       return (this.passwd= r);
     },
     quitarEspacios() {
-      return this.infoUser.nombreUsuario.split(" ").join(".");
+      let unir = this.username.split(" ")
+      this.nick = unir.length > 1 ? unir[0]+'.'+unir[1]  : unir[0]
     },
     procesarUsuario() {
+      // if(this.nombreUsuario === "" && this.passwd === ""){
+      //   return
+      // }
       const NuevoUser = {
         nombreUsuario: this.username,
         NickName: this.nick,
         Contrasena: this.passwd,
-        fechaCreacion: " ",
+        fechaCreacion: this.$moment().format('llll'),
+        fechaEdicion: ""
       }
       //enviando datos
       this.setNewUsuario(NuevoUser);
@@ -108,7 +119,8 @@ export default {
         nombreUsuario: this.username,
         NickName: this.nick,
         Contrasena: this.passwd,
-        fechaCreacion: " ",
+        fechaCreacion: this.fecha,
+        fechaEdicion: this.$moment().format('llll'),
         id
 
       }
@@ -118,6 +130,9 @@ export default {
   },
   computed: {
     ...mapState(["editUser", "userEdit"]),
+    validar() {
+      return this.username.trim() === "" ? true : false;
+    }
   },
 }
 </script>

@@ -56,8 +56,8 @@
                   ></b-card-img>
                 </b-col>
                 <b-col md="9">
-                  <b-card-body title="Nombre Usuario">
-                    <b-card-text> NickName </b-card-text>
+                  <b-card-body :title="`Nombre Usuario :${editUser.nombreUsuario}`">
+                    <b-card-text> {{`Nickname: ${editUser.NickName}`}} </b-card-text>
                     <b-button variant="primary" class="material-icons" 
                   >update
                 </b-button>
@@ -95,7 +95,7 @@ export default {
     // editarFormulario()
   },
   computed: {
-    ...mapState(["UserNames"]),
+    ...mapState(["UserNames",'editUser']),
 
   },
   methods: {
