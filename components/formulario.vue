@@ -132,7 +132,7 @@ export default {
   computed: {
     ...mapState(["editUser", "userEdit"]),
     validar() {
-      return this.username.trim() === "" ? true : false 
+      return (this.username.trim() === "" || this.passwd.trim() === "") ? true : false 
       
     },
   },
