@@ -47,13 +47,13 @@
           <span class="text-dark">{{ edicion }}</span>
         </b-form-text>
 
-        <b-button v-if="!userEdit" @click="procesarUsuario" type="submit" variant="primary" class="material-icons"
+        <b-button v-if="!userEdit" @click="procesarUsuario" type="submit" variant="primary" class="material-icons" :disabled="validar"
           >save GUARDAR</b-button
         >
         <b-button v-if="userEdit"  type="submit" @click="deleteUser(editUser.id)" variant="danger" class="material-icons"
           >delete ELIMINAR</b-button
         >
-          <b-button v-if="userEdit"  @click="editarUsuario(editUser.id)" type="submit" variant="primary" class="material-icons" :disabled="validar"
+          <b-button v-if="userEdit" :disabled="validar" @click="editarUsuario(editUser.id)" type="submit" variant="primary" class="material-icons" 
           >update ACTUALIZAR</b-button
         >
       </b-form-group>
@@ -115,6 +115,7 @@ export default {
   },
 
     editarUsuario(id){
+    
       const editUsers = {
         nombreUsuario: this.username,
         NickName: this.nick,
@@ -131,8 +132,9 @@ export default {
   computed: {
     ...mapState(["editUser", "userEdit"]),
     validar() {
-      return this.username.trim() === "" ? true : false;
-    }
+      return this.username.trim() === "" ? true : false 
+      
+    },
   },
 }
 </script>
