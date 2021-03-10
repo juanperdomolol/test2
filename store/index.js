@@ -36,7 +36,7 @@ export const actions = {
         try {
             const Passwords = await this.$axios({
                 method: "get",
-                url: `http://localhost:3000/passwords?_sort=id&_order=asc`,
+                url: `http://localhost:3000/passwords?_sort=fechaCreacion&_order=asc`,
                 "Content-Type":"application/json"
             })
             console.log(Passwords)
@@ -61,7 +61,7 @@ export const actions = {
         try {
             const Passwords = await this.$axios({
                 method: "get",
-                url: `http://localhost:3000/passwords?_sort=id&_order=desc`,
+                url: `http://localhost:3000/passwords?_sort=fechaCreacion&_order=desc`,
                 "Content-Type":"application/json"
             })
             console.log(Passwords)

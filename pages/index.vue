@@ -23,17 +23,22 @@
 
         <b-row>
           <b-col>
-            <span>Ordenar por id</span>
+            <span>Ordenar por fecha</span>
             <b-button @click="Asc" class="mt-2">Asc </b-button>
             <b-button @click="Desc" class="mt-2">Desc </b-button>
-             <b-button  @click="nuevo" type="submit" variant="success" class="material-icons" 
-          >person_add_alt </b-button>
+            <b-button
+              @click="nuevo"
+              type="submit"
+              variant="success"
+              class="material-icons"
+              >person_add_alt
+            </b-button>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col>
-            <div v-b-scrollspy>
+            <div v-b-scrollspy:nav-scroller>
               <users
                 class="mt-3"
                 v-for="(user, i) in UserNames"
@@ -101,8 +106,8 @@ export default {
   },
   methods: {
     ...mapActions(["setNewUsuario", "Asc", "Desc"]),
-    nuevo(){
-      location.reload()
+    nuevo() {
+      location.reload();
     },
     buscarPassword(buscar) {
       this.$store.dispatch("searchUsuario", buscar);
@@ -132,6 +137,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style>
