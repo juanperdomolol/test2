@@ -107,7 +107,7 @@ export default {
         nombreUsuario: this.username,
         NickName: this.nick,
         Contrasena: this.passwd,
-        fechaCreacion: this.$moment().format('llll'),
+        fechaCreacion: this.$moment().format('lll'),
         fechaEdicion: ""
       }
       //enviando datos
@@ -121,7 +121,7 @@ export default {
         NickName: this.nick,
         Contrasena: this.passwd,
         fechaCreacion: this.fecha,
-        fechaEdicion: this.$moment().format('llll'),
+        fechaEdicion: this.$moment().format('lll'),
         id
 
       }

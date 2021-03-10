@@ -4,14 +4,14 @@
       <b-col cols="4">
         <b-row>
           <b-col>
-            <b-input-group  class="mt-3">
+            <b-input-group class="mt-3">
               <b-input-group-prepend>
-                <b-button variant="success" class="material-icons" 
+                <b-button variant="success" class="material-icons"
                   >search
                 </b-button>
               </b-input-group-prepend>
               <b-form-input
-              v-model="buscar"
+                v-model="buscar"
                 type="text"
                 class="mr-sm-2"
                 placeholder="Buscar"
@@ -23,9 +23,11 @@
 
         <b-row>
           <b-col>
-            <span>Ordenar por nombre</span>
+            <span>Ordenar por id</span>
             <b-button @click="Asc" class="mt-2">Asc </b-button>
-            <b-button  @click="Desc" class="mt-2">Desc </b-button>
+            <b-button @click="Desc" class="mt-2">Desc </b-button>
+             <b-button  @click="nuevo" type="submit" variant="success" class="material-icons" 
+          >person_add_alt </b-button>
           </b-col>
         </b-row>
 
@@ -33,11 +35,10 @@
           <b-col>
             <div v-b-scrollspy>
               <users
-              class="mt-3"
+                class="mt-3"
                 v-for="(user, i) in UserNames"
                 :key="user.id"
                 :UserNames="UserNames[i]"
-                
               />
             </div>
           </b-col>
@@ -47,7 +48,7 @@
       <b-col cols="8">
         <b-row>
           <b-col>
-            <b-card bg-variant="warning"  class="mt-3 mb-5">
+            <b-card bg-variant="warning" class="mt-3 mb-5">
               <b-row no-gutters>
                 <b-col md="3">
                   <b-card-img
@@ -56,18 +57,19 @@
                   ></b-card-img>
                 </b-col>
                 <b-col md="9">
-                  <b-card-body :title="`Nombre Usuario :${editUser.nombreUsuario}`">
-                    <b-card-text> {{`Nickname: ${editUser.NickName}`}} </b-card-text>
-                    <b-button variant="primary" class="material-icons" 
-                  >update
-                </b-button>
+                  <b-card-body
+                    :title="`Nombre Usuario :${editUser.nombreUsuario}`"
+                  >
+                    <b-card-text>
+                      {{ `Nickname: ${editUser.NickName}` }}
+                    </b-card-text>
                   </b-card-body>
                 </b-col>
               </b-row>
             </b-card>
             <formulario ref="formularioUser" />
-              
-              <!-- <formulario /> -->
+
+            <!-- <formulario /> -->
           </b-col>
         </b-row>
       </b-col>
@@ -81,10 +83,10 @@ import formulario from "@/components/formulario";
 
 import { mapState, mapActions } from "vuex";
 export default {
-  data(){
-    return{
-      buscar:''
-    }
+  data() {
+    return {
+      buscar: "",
+    };
   },
   components: {
     users,
@@ -95,13 +97,15 @@ export default {
     // editarFormulario()
   },
   computed: {
-    ...mapState(["UserNames",'editUser']),
-
+    ...mapState(["UserNames", "editUser"]),
   },
   methods: {
-    ...mapActions(["setNewUsuario",'Asc','Desc']),
-    buscarPassword(buscar){
-      this.$store.dispatch("searchUsuario",buscar)
+    ...mapActions(["setNewUsuario", "Asc", "Desc"]),
+    nuevo(){
+      location.reload()
+    },
+    buscarPassword(buscar) {
+      this.$store.dispatch("searchUsuario", buscar);
     },
     // editarFormulario(){
     //   this.$store.state('UserNames')===this.formUser
