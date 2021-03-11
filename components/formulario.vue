@@ -6,6 +6,8 @@
         :class="{ 'b-form-group--error': $v.username.$error }"
       >
         <b-form-input
+            :state="!$v.username.$invalid"
+
           v-model.trim="$v.username.$model"
           type="text"
           placeholder="Ingresa tu nombre de usuario"
@@ -13,13 +15,13 @@
           required
         >
         </b-form-input>
-        <div class="error" v-if="!$v.username.required">
-          Este campo es requerido
-        </div>
-        <div class="error" v-if="!$v.username.minLength">
-          username debe tener mas de
-          {{ $v.username.$params.minLength.min }} letras.
-        </div>
+        <b-form-invalid-feedback>
+            Este campo es requerido
+          </b-form-invalid-feedback>
+          <b-form-invalid-feedback>
+            La contraseña debe tener mas de
+            {{ $v.username.$params.minLength.min }} letras.
+          </b-form-invalid-feedback>
         <tree-view
           :data="$v.username"
           :options="{ rootObjectKey: '$v.username', maxDepth: 2 }"
@@ -40,6 +42,7 @@
       <b-form-group label="Contraseña">
         <b-input-group>
           <b-form-input
+            :state="!$v.passwd.$invalid"
             v-model.trim="$v.passwd.$model"
             type="text"
             placeholder="Ingresa tu Contraseña"
@@ -49,13 +52,13 @@
           <b-input-group-append>
             <b-button @click="aleatorio()" variant="success">Generar </b-button>
           </b-input-group-append>
-          <div class="error" v-if="!$v.passwd.required">
+          <b-form-invalid-feedback>
             Este campo es requerido
-          </div>
-          <div class="error" v-if="!$v.passwd.minLength">
+          </b-form-invalid-feedback>
+          <b-form-invalid-feedback>
             La contraseña debe tener mas de
             {{ $v.passwd.$params.minLength.min }} letras.
-          </div>
+          </b-form-invalid-feedback>
           <tree-view
             :data="$v.passwd"
             :options="{ rootObjectKey: '$v.passwd', maxDepth: 2 }"
@@ -181,9 +184,8 @@ export default {
   computed: {
     ...mapState(["editUser", "userEdit"]),
     validar() {
-      return this.$v.$invalid ? true : false
+      return this.$v.$invalid ? true : false;
     },
-  
   },
 };
 </script>
