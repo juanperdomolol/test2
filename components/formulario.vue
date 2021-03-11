@@ -44,13 +44,15 @@
           <b-form-input
             :state="!$v.passwd.$invalid"
             v-model.trim="$v.passwd.$model"
-            type="text"
+            :type="passwordFieldType"
             placeholder="Ingresa tu Contraseña"
             required
           >
           </b-form-input>
           <b-input-group-append>
             <b-button @click="aleatorio()" variant="success">Generar </b-button>
+            <b-button  @click="showPass()" class="material-icons">visibility </b-button>
+
           </b-input-group-append>
           <b-form-invalid-feedback>
             Este campo es requerido
@@ -119,6 +121,7 @@ export default {
       passwd: "",
       fecha: "",
       edicion: "",
+      passwordFieldType: 'password'
     };
   },
   validations: {
@@ -148,6 +151,10 @@ export default {
   methods: {
     ...mapActions(["setNewUsuario", "deleteUser", "uptadeUser"]),
 
+    showPass() {
+      let pass = this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+      return pass
+    },
     aleatorio() {
       let r = Math.random().toString(36).substring(7);
       return (this.passwd = r);
