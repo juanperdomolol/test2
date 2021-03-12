@@ -6,7 +6,7 @@
           <b-col>
             <b-input-group class="mt-3">
               <b-input-group-prepend>
-                <b-button variant="success" class="material-icons"
+                <b-button class="material-icons botonEstilo"
                   >search
                 </b-button>
               </b-input-group-prepend>
@@ -24,13 +24,12 @@
         <b-row>
           <b-col>
             <span>Ordenar por fecha</span>
-            <b-button @click="Asc" class="mt-2">Asc </b-button>
-            <b-button @click="Desc" class="mt-2">Desc </b-button>
+            <b-button @click="Asc" class="mt-2 botonFiltros">Asc </b-button>
+            <b-button @click="Desc" class="mt-2 botonFiltros">Desc </b-button>
             <b-button
               @click="nuevo"
               type="submit"
-              variant="success"
-              class="material-icons"
+              class="material-icons botonEstilo"
               >person_add_alt
             </b-button>
           </b-col>
@@ -38,7 +37,7 @@
 
         <b-row>
           <b-col>
-            <div v-b-scrollspy:nav-scroller>
+            <div >
               <users
                 class="mt-3"
                 v-for="(user, i) in UserNames"
@@ -53,7 +52,7 @@
       <b-col cols="8">
         <b-row>
           <b-col>
-            <b-card bg-variant="warning" class="mt-3 mb-5">
+            <b-card  class="card-info mt-3 mb-5">
               <b-row no-gutters>
                 <b-col md="3">
                   <b-card-img
@@ -62,7 +61,7 @@
                   ></b-card-img>
                 </b-col>
                 <b-col md="9">
-                  <b-card-body
+                  <b-card-body 
                     :title="`Nombre Usuario :${editUser.nombreUsuario}`"
                   >
                     <b-card-text>
@@ -141,4 +140,25 @@ export default {
 </script>
 
 <style>
+.card-info{
+  background-color: #90EE90;
+}
+.botonEstilo{
+background-color: #2E8B57;
+}
+.botonEstilo:hover{
+background:#20B2AA	;
+  color: #fff !important;
+}
+.botonFiltros{
+  background-color: #FF00FF;
+}
+.botonFiltros:hover{
+ background: #EE82EE;
+  color: #fff !important;
+}
+.botonFiltros:active{
+ background: #EE82EE;
+  color: #fff !important;
+}
 </style>

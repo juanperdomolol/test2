@@ -81,8 +81,7 @@
         v-if="!userEdit"
         @click="procesarUsuario"
         type="submit"
-        variant="primary"
-        class="material-icons"
+        class="botonAzul material-icons "
         :disabled="validar"
         >save GUARDAR</b-button
       >
@@ -99,8 +98,7 @@
         :disabled="validar"
         @click="editarUsuario(editUser.id)"
         type="submit"
-        variant="primary"
-        class="material-icons"
+        class="material-icons botonAzul"
         >update ACTUALIZAR</b-button
       >
     </b-form>
@@ -198,4 +196,12 @@ export default {
 </script>
 
 <style>
+.botonAzul{
+  background-color: #0000CD;
+}
+.btn-secondary.disabled, .btn-secondary:disabled {
+    color: #fff;
+    background-color: #A9A9A9;
+    border-color: #6c757d;
+}
 </style>

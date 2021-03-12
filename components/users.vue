@@ -1,7 +1,7 @@
 <template>
   <div > 
               
-    <b-card  bg-variant="warning" @click.prevent="editUser" style="cursor:pointer">  
+    <b-card  class="colorCards" @click.prevent="editUser" style="cursor:pointer">  
          <b-row no-gutters>
       <b-col md="3">
         <b-card-img src="../assets/user_icon.png" style="max-width: 50px" ></b-card-img>
@@ -27,6 +27,11 @@ export default {
     computed: {
       ...mapState(['userEdit'])
     },
+    mounted(){
+      this.$root.$on("ver-usuario", () => {
+        console.log("ejecutado")
+      })
+    },
     methods:{
         ...mapActions(["verUsuario"]),
         editUser(id){
@@ -41,4 +46,7 @@ export default {
 </script>
 
 <style>
+.colorCards{
+  background-color: #98FB98;
+}
 </style>

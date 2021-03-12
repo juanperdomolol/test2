@@ -6,7 +6,7 @@
 
 <style>
 body{
-  background-color: darkcyan;
+  background-color: #FFF8DC;
 }
 html {
   font-family:
